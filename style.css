@@ -7,6 +7,7 @@
 }
 
 body {
+  max-width: 100%;
   font-size: 13px;
   font-family: "Manrope", sans-serif;
 }
@@ -46,9 +47,12 @@ main {
 }
 
 .info-container {
-  padding: 2.46em 3.077em;
   border-radius: 0 10px 10px 0;
   background-color: white;
+}
+
+.info-container__title {
+  padding: 2.46em 3.077em 0 3.077em;
 }
 
 .info-container__title p {
@@ -60,14 +64,14 @@ main {
 }
 
 .info-container__paragraph {
-  padding-top: 1em;
+  padding: 1em 3.077em 1.538em 3.077em;
   line-height: 20px;
   letter-spacing: 0.24px;
   color: hsl(214, 17%, 51%);
 }
 
 .info-container__footer {
-  padding-top: 1.538em;
+  padding: 0 3.077em 2.46em 3.077em;
 
   display: flex;
   justify-content: space-between;
@@ -87,6 +91,9 @@ main {
   height: 32px;
   border-radius: 50%;
 
+  z-index: 1;
+  position: relative;
+
   cursor: pointer;
   background-color: hsl(210, 46%, 95%);
 }
@@ -95,7 +102,7 @@ main {
   position: absolute;
   bottom: 0;
   left: 50%;
-  transform: translate3d(-50%, -55px, 0);
+  transform: translate3d(-50%, -45px, 0);
 
   display: flex;
   align-items: center;
@@ -104,14 +111,22 @@ main {
   border-radius: 10px;
   color: white;
   background-color: hsl(217, 19%, 35%);
+
+  transition: linear opacity 0.3s, linear transform 0.3s;
+  opacity: 0;
 }
 
-.footer__section::before {
+.social-media-links.active {
+  opacity: 1;
+  transform: translate3d(-50%, -55px, 0);
+}
+
+.social-media-links::before {
   content: "";
   position: absolute;
   bottom: 0;
   left: 50%;
-  transform: translate3d(-50%, -46.5px, 0) rotateZ(45deg);
+  transform: translate3d(-50%, 50%, 0) rotateZ(45deg);
   width: 17px;
   height: 17px;
   background-color: hsl(217, 19%, 35%);
@@ -144,11 +159,11 @@ main {
   fill: red;
 }
 
-.footer__share-btn:hover {
+.footer__share-btn.active {
   background-color: hsl(214, 17%, 51%);
 }
 
-.footer__share-btn:hover #share-btn {
+.footer__share-btn.active #share-btn {
   fill: white;
 }
 
@@ -178,6 +193,12 @@ main {
   color: hsl(214, 17%, 51%);
 }
 
+@media (min-width: 768px) and (max-width: 872px) {
+  body {
+    font-size: 10.5px;
+  }
+}
+
 /*Mobile version 768px*/
 @media (max-width: 768px) {
   .container {
@@ -191,6 +212,7 @@ main {
 
   .info-container {
     border-radius: 0 0 10px 10px;
+    overflow: hidden; /*remove it and click share button )) you will see*/
   }
 
   .image-section-desktop img {
@@ -205,5 +227,42 @@ main {
       object-fit: cover;
       top: auto;
     }
+  }
+  .footer__section {
+    position: static;
+  }
+
+  .info-container__footer {
+    position: relative;
+    overflow: hidden;
+
+    padding: 1.23em 3.077em 1.23em 3.077em;
+  }
+  /*now social media links are relative to info-container__footer*/
+  .social-media-links {
+    border-radius: 0 0 10px 10px;
+
+    width: 100%;
+    height: 100%;
+
+    position: absolute;
+    left: 0;
+    bottom: 0;
+
+    transform: translate3d(0, 100%, 0);
+  }
+
+  .social-media-links.active {
+    transform: translate3d(0, 0, 0);
+  }
+
+  .social-media-links::before {
+    display: none;
+  }
+
+  .info-container__title p {
+    font-size: 16px;
+    letter-spacing: 0.22px;
+    line-height: 24px;
   }
 }
